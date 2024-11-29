@@ -121,3 +121,33 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Installed apps
+
+INSTALLED_APPS += [
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # Add any providers you need
+    'allauth.socialaccount.providers.google',
+    'dj_rest_auth',
+    'rest_framework.authtoken',
+]
+
+# Required settings for Django AllAuth
+SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # or "username" or "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "optional"  # or "mandatory"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+# Middleware
+MIDDLEWARE += [
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+]
+
